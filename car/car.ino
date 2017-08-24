@@ -1,3 +1,4 @@
+const int dummy = 0;
 const int irpin = 11; //Green
 const int in4pin = 8; //Black
 const int in3pin = 7; //Green
