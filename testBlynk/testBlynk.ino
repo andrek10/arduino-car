@@ -43,24 +43,47 @@
 
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
-char auth[] = "YourAuthToken";
+char auth[] = "";
 
 // Your WiFi credentials.
 // Set password to "" for open networks.
-char ssid[] = "YourNetworkName";
-char pass[] = "YourPassword";
+char ssid[] = "";
+char pass[] = "";
 
 // Hardware Serial on Mega, Leonardo, Micro...
-#define EspSerial Serial1
+// #define EspSerial Serial1
 
 // or Software Serial on Uno, Nano...
-//#include <SoftwareSerial.h>
-//SoftwareSerial EspSerial(2, 3); // RX, TX
+#include <SoftwareSerial.h>
+SoftwareSerial EspSerial(2, 3); // RX, TX
 
 // Your ESP8266 baud rate:
-#define ESP8266_BAUD 115200
+#define ESP8266_BAUD 9600
 
 ESP8266 wifi(&EspSerial);
+
+// Define my own variables
+// -----------------------
+// Motor on/off
+int motorOn;
+
+
+BLYNK_WRITE(V1) {
+  int x = param[0].asInt();
+  int y = param[1].asInt();
+
+  // Do something with x and y
+  Serial.print("X = ");
+  Serial.print(x);
+  Serial.print("; Y = ");
+  Serial.println(y);
+}
+
+BLYNK_WRITE(V8) {
+  motorOn = param.asInt();
+  Serial.print("motorOn = ");
+  Serial.println(motorOn);
+}
 
 void setup()
 {
@@ -75,6 +98,9 @@ void setup()
   // You can also specify server:
   //Blynk.begin(auth, wifi, ssid, pass, "blynk-cloud.com", 8442);
   //Blynk.begin(auth, wifi, ssid, pass, IPAddress(192,168,1,100), 8442);
+
+  // Set internal blinklight
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop()
