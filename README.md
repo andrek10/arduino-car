@@ -11,7 +11,7 @@ ESP8266 is set to BAUD rate 9600 using the command
 
 AT+UART_DEF=9600,8,1,0,0
 ### car
-The arduino program to run the car.
+The arduino program to run the car. Motor controller needs update
 
 Blynk libraries must be located in the sketch-folder.
 
